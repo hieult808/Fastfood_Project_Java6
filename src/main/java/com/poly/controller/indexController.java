@@ -15,10 +15,6 @@ public class indexController {
 		return "index";
 	}
 	
-	@GetMapping("/shop")
-	public String shop(Model model) {
-		return "shop";
-	}
 	
 	@GetMapping("/cart")
 	public String cart(Model model) {

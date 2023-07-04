@@ -38,8 +38,8 @@ public class Item implements Serializable {
 	private boolean status;
 
 	@ManyToOne
-	@JoinColumn(name = "discount_code_id")
-	private DiscountCode discountCode;
+	@JoinColumn(name = "code_id")
+	private DiscountCode codeId;
 
 	@Column(name = "active")
 	private boolean active;

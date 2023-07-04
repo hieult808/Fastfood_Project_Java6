@@ -11,10 +11,8 @@ import lombok.Data;
 import java.io.Serializable;
 import java.util.Date;
 @Data
-
-
 @Entity
-@Table(name = "DiscountCodes")
+@Table(name = "discountcodes")
 public class DiscountCode implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
