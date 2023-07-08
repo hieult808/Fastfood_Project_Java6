@@ -10,11 +10,22 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Data
 @Entity
 @Table(name = "Accounts")
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class Account implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,12 +35,15 @@ public class Account implements Serializable {
 	@Column(name = "username")
 	private String username;
 
+	@NotBlank(message = "{NotBlank.account.password}")
 	@Column(name = "pass_work")
 	private String password;
 
 	@Column(name = "full_name")
 	private String fullName;
-
+	
+	@NotBlank(message = "{NotBlank.account.email}")
+	@Email(message = "{Email.account.email}")
 	@Column(name = "email")
 	private String email;
 
