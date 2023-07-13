@@ -6,15 +6,24 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class Admin {
-	@GetMapping("/profile")
+	@GetMapping("profile")
 	public String indexAdmin(Model model) {
 		return "admin/profile";
 	}
 	
-	@GetMapping("/item")
+	@GetMapping("category")
 	public String index2(Model model) {
 		return "admin/basic-table";
 	}
 	
+	@GetMapping("admin")
+	public String index3(Model model) {
+		return "admin/dashboard";
+	}
+	
+	@GetMapping("item")
+	public String index4(Model model) {
+		return "admin/profile";
+	}
 	
 }
