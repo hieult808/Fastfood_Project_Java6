@@ -14,6 +14,10 @@ public class indexController {
 	public String index(Model model) {
 		return "index";
 	}
+	@GetMapping("/index_2")
+	public String index2(Model model) {
+		return "index_2";
+	}
 	
 	
 	@GetMapping("/cart")
@@ -49,11 +53,6 @@ public class indexController {
 	@GetMapping("/single-product")
 	public String singleproduct(Model model) {
 		return "single-product";
-	}
-	
-	@GetMapping("/profile")
-	public String indexAdmin(Model model) {
-		return "admin/profile";
 	}
 	
 	@GetMapping("/login")
