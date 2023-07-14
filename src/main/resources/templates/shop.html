@@ -93,9 +93,9 @@
                     <div class="product-filters">
                         <ul>
                             <li class="active" data-filter="*">All</li>
-                            <li data-filter=".strawberry">Strawberry</li>
-                            <li data-filter=".berry">Berry</li>
-                            <li data-filter=".lemon">Lemon</li>
+                            <li data-filter=".strawberry">Đồ ăn</li>
+                            <li data-filter=".berry">Đồ uống</li>
+                            <li data-filter=".lemon">Đồ ngọt</li>
                         </ul>
                     </div>
                 </div>
@@ -105,12 +105,13 @@
 				<div class="col-lg-4 col-md-6 text-center strawberry" th:each="item : ${items}">
 					<div class="single-product-item">
 						<div class="product-image">
+						<a th:href="@{/single-product}">     
 							<img th:src="@{'/uploads/' + ${item.image.substring(11)}}"
-									alt="Product Image">
+									alt="Product Image"></a>
 						</div>
 						<h3 th:text="${item.name}"></h3>
 						<p class="product-price" th:text="${@customNumberFormat.formatCurrency(item.price)}"><span>Per Kg</span> 85$ </p>
-						<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+						<a th:href="@{/cart}" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
 					</div>
 				</div>
 				<!-- <div class="col-lg-4 col-md-6 text-center berry">
