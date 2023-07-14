@@ -75,12 +75,7 @@
                 <!-- End Logo -->
                 <!-- ============================================================== -->
                 <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
-                    <ul class="navbar-nav d-none d-md-block d-lg-none">
-                        <li class="nav-item">
-                            <a class="nav-toggler nav-link waves-effect waves-light text-white"
-                                href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
-                        </li>
-                    </ul>
+                   
                     <!-- ============================================================== -->
                     <!-- Right side toggle and nav items -->
                     <!-- ============================================================== -->
@@ -173,7 +168,7 @@
             <div class="page-breadcrumb bg-white">
                 <div class="row align-items-center">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Basic Table</h4>
+                        <h4 class="page-title">Dashboard</h4>
                     </div>
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                         <div class="d-md-flex">
@@ -196,66 +191,99 @@
             <!-- ============================================================== -->
             <div class="container-fluid">
                 <!-- ============================================================== -->
-                <!-- Start Page Content -->
+                <!-- Three charts -->
+                <!-- ============================================================== -->
+                <div class="row justify-content-center">
+                    <div class="col-lg-4 col-md-12">
+                        <div class="white-box analytics-info">
+                            <h3 class="box-title">Doanh thu trong ngày</h3>
+                            <ul class="list-inline two-part d-flex align-items-center mb-0">
+                                <li>
+                                    <div id="sparklinedash"><canvas width="67" height="30"
+                                            style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
+                                    </div>
+                                </li>
+                                <li class="ms-auto"><span class="counter text-success">10.000.000 vnđ</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12">
+                        <div class="white-box analytics-info">
+                            <h3 class="box-title">Tổng số món</h3>
+                            <ul class="list-inline two-part d-flex align-items-center mb-0">
+                                <li>
+                                    <div id="sparklinedash2"><canvas width="67" height="30"
+                                            style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
+                                    </div>
+                                </li>
+                                <li class="ms-auto"><span class="counter text-purple">50</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                <!-- ============================================================== -->
+                <!-- RECENT SALES -->
                 <!-- ============================================================== -->
                 <div class="row">
-                    <div class="col-sm-12">
+                    <div class="col-md-12 col-lg-12 col-sm-12">
                         <div class="white-box">
-                            <h3 class="box-title">Basic Table</h3>
-                            <p class="text-muted">Add class <code>.table</code></p>
+                            <div class="d-md-flex mb-3">
+                                <h3 class="box-title mb-0">Lịch sử mua hàng</h3>
+                            </div>
                             <div class="table-responsive">
-                                <table class="table text-nowrap">
+                                <table class="table no-wrap">
                                     <thead>
                                         <tr>
                                             <th class="border-top-0">#</th>
-                                            <th class="border-top-0">First Name</th>
-                                            <th class="border-top-0">Last Name</th>
-                                            <th class="border-top-0">Username</th>
-                                            <th class="border-top-0">Role</th>
+                                            <th class="border-top-0">Khách hàng</th>
+                                            <th class="border-top-0">Tên món</th>
+                                            <th class="border-top-0">Số lượng món</th>
+                                            <th class="border-top-0">Thời gian</th>
+                                            <th class="border-top-0">Tổng tiền</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <td>1</td>
-                                            <td>Deshmukh</td>
-                                            <td>Prohaska</td>
-                                            <td>@Genelia</td>
-                                            <td>admin</td>
+                                            <td class="txt-oflo">Lê Trung Hiếu</td>
+                                            <td>Hamberger</td>
+                                            <td>10</td>
+                                            <td class="txt-oflo">10AM 14/7/2023</td>
+                                            <td><span class="text-success">2.000.000 vnđ</span></td>
                                         </tr>
                                         <tr>
                                             <td>2</td>
-                                            <td>Deshmukh</td>
-                                            <td>Gaylord</td>
-                                            <td>@Ritesh</td>
-                                            <td>member</td>
+                                            <td class="txt-oflo">Lê Trung Hiếu</td>
+                                            <td>Hamberger</td>
+                                            <td>10</td>
+                                            <td class="txt-oflo">10:15 AM 14/7/2023</td>
+                                            <td><span class="text-success">2.000.000 vnđ</span></td>
                                         </tr>
                                         <tr>
                                             <td>3</td>
-                                            <td>Sanghani</td>
-                                            <td>Gusikowski</td>
-                                            <td>@Govinda</td>
-                                            <td>developer</td>
+                                            <td class="txt-oflo">Lê Trung Hiếu</td>
+                                            <td>Hamberger</td>
+                                            <td>10</td>
+                                            <td class="txt-oflo">10:30 AM 14/7/2023</td>
+                                            <td><span class="text-success">2.000.000 vnđ</span></td>
                                         </tr>
                                         <tr>
                                             <td>4</td>
-                                            <td>Roshan</td>
-                                            <td>Rogahn</td>
-                                            <td>@Hritik</td>
-                                            <td>supporter</td>
+                                            <td class="txt-oflo">Lê Trung Hiếu</td>
+                                            <td>Hamberger</td>
+                                            <td>10</td>
+                                            <td class="txt-oflo">11:00 AM 14/7/2023</td>
+                                            <td><span class="text-success">2.000.000 vnđ</span></td>
                                         </tr>
                                         <tr>
                                             <td>5</td>
-                                            <td>Joshi</td>
-                                            <td>Hickle</td>
-                                            <td>@Maruti</td>
-                                            <td>member</td>
-                                        </tr>
-                                        <tr>
-                                            <td>6</td>
-                                            <td>Nigam</td>
-                                            <td>Eichmann</td>
-                                            <td>@Sonu</td>
-                                            <td>supporter</td>
+                                            <td class="txt-oflo">Lê Trung Hiếu</td>
+                                            <td>Hamberger</td>
+                                            <td>10</td>
+                                            <td class="txt-oflo">7:00 PM 14/7/2023</td>
+                                            <td><span class="text-success">2.000.000 vnđ</span></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -264,15 +292,9 @@
                     </div>
                 </div>
                 <!-- ============================================================== -->
-                <!-- End PAge Content -->
+                <!-- Recent Comments -->
                 <!-- ============================================================== -->
-                <!-- ============================================================== -->
-                <!-- Right sidebar -->
-                <!-- ============================================================== -->
-                <!-- .right-sidebar -->
-                <!-- ============================================================== -->
-                <!-- End Right sidebar -->
-                <!-- ============================================================== -->
+                
             </div>
             <!-- ============================================================== -->
             <!-- End Container fluid  -->

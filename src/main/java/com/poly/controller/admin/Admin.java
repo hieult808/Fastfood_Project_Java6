@@ -23,7 +23,7 @@ public class Admin {
 	
 	@GetMapping("item")
 	public String index4(Model model) {
-		return "admin/profile";
+		return "admin/item";
 	}
 	
 }
