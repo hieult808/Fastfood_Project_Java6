@@ -19,13 +19,14 @@
             <div class="form login">
                 <div class="form-content">
                     <header>Login</header>
-                    <form action="#">
+                    <h1 th:if="${messages}" th:text="${messages}"></h1>
+                    <form th:action="@{/login}" th:object="${acc}" method="post">
                         <div class="field input-field">
-                            <input type="email" placeholder="Email" class="input">
+                            <input type="text" placeholder="Username" class="input" th:field="*{username}" name="username" >
                         </div>
 
                         <div class="field input-field">
-                            <input type="password" placeholder="Password" class="password">
+                            <input type="password" placeholder="Password" class="password" th:field="*{password}" >
                             <i class='bx bx-hide eye-icon'></i>
                         </div>
 

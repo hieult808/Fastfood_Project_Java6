@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Responsive Bootstrap4 Shop Template, Created by Imran Hossain from https://imransdesign.com/">
+	<meta name="description"
+		content="Responsive Bootstrap4 Shop Template, Created by Imran Hossain from https://imransdesign.com/">
 
 	<!-- title -->
 	<title>Fruitkha</title>
@@ -30,41 +32,52 @@
 	<link rel="stylesheet" href="assets/css/main.css">
 	<!-- responsive -->
 	<link rel="stylesheet" href="assets/css/responsive.css">
-  <style>
-	  .product-price::after {
-	    content: " ₫"; /* Đơn vị tiền tệ: đ (Đồng Việt Nam) */
-	  }
-	</style>
+	<!-- <style>
+		.product-price::after {
+			content: " ₫";
+			/* Đơn vị tiền tệ: đ (Đồng Việt Nam) */
+		}
+	</style> -->
 </head>
+
 <body>
-	
+
 	<!--PreLoader-->
-    <div class="loader">
-        <div class="loader-inner">
-            <div class="circle"></div>
-        </div>
-    </div>
-    <!--PreLoader Ends-->
-	
+	<div class="loader">
+		<div class="loader-inner">
+			<div class="circle"></div>
+		</div>
+	</div>
+	<!--PreLoader Ends-->
+
 	<div th:include="/layout/nav.html"></div>
-	
+
 	<!-- search area -->
-	<div class="search-area">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<span class="close-btn"><i class="fas fa-window-close"></i></span>
-					<div class="search-bar">
-						<div class="search-bar-tablecell">
-							<h3>Search For:</h3>
-							<input type="text" placeholder="Keywords">
-							<button type="submit">Search <i class="fas fa-search"></i></button>
+	<form action="/index" method="get">
+		<div class="search-area">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<span class="close-btn"><i class="fas fa-window-close"></i></span>
+						<div class="search-bar">
+							<div class="search-bar-tablecell">
+								<h3>Search For:</h3>
+								<input type="text" placeholder="Keywords" id="keyword" name="keyword">
+								<!-- Ô nhập giá tối thiểu -->
+								<h3 >Min Price:</h3>
+								<input type="number" id="minPrice" name="minPrice" step="0.01">
+
+								<!-- Ô nhập giá tối đa -->
+								<h3 >Max Price:</h3>
+								<input type="number" id="maxPrice" name="maxPrice" step="0.01">
+								<input type="submit">Search <i class="fas fa-search"></i></input>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+	</form>
 	<!-- end search area -->
 
 	<!-- hero area -->
@@ -95,129 +108,127 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8 offset-lg-2 text-center">
-					<div class="section-title">	
-						<h3><span class="orange-text">Our</span> Đồ ăn</h3>
+					<div class="section-title">
+						<h3><span class="orange-text">Our</span> Sản phẩm giảm giá</h3>
 					</div>
 				</div>
 			</div>
 
 			<div class="row">
-				<div class="col-lg-4 col-md-6 text-center">
+				<div class="col-lg-4 col-md-6 text-center" th:each="item : ${items}">
 					<div class="single-product-item">
 						<div class="product-image">
-							<a th:href="@{/single-product}"><img src="assets/img/products/item1.jpg" alt=""></a>
+							<a th:href="@{/shop/{itemId}(itemId=${item.itemId})}">
+								<img th:src="@{'/uploads/' + ${item.image.substring(11)}}" alt="Product Image"></a>
 						</div>
-						<h3>Lẩu</h3>
-						<p class="product-price"><span>Đồ ăn</span> 70.000 </p>
-						<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0 text-center">
-					<div class="single-product-item">
-						<div class="product-image">
-							<a th:href="@{/single-product}"><img src="assets/img/products/item3.jpg" alt=""></a>
-						</div>
-						<h3>Bánh</h3>
-						<p class="product-price"><span>Đồ ngọt</span> 35.000 </p>
-						<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0 text-center">
-					<div class="single-product-item">
-						<div class="product-image">
-							<a th:href="@{/single-product}"><img src="assets/img/products/item13.jpg" alt=""></a>
-						</div>
-						<h3>Bánh</h3>
-						<p class="product-price"><span>Đồ ngọt</span> 35.000 </p>
-						<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+						<h3 th:text="${item.name}"></h3>
+						<span>Đồ ăn</span>
+						<p class="product-price" th:text="${@customNumberFormat.formatCurrency(item.price)}"></p>
+						<a th:href="@{/cart/{itemId}(itemId=${item.itemId})}" class="cart-btn">
+							<i class="fas fa-shopping-cart"></i> Add to Cart</a>
 					</div>
 				</div>
 			</div>
 		</div>
+		<!-- Hiển thị thông báo nếu không có sản phẩm -->
 		<div class="row">
-				<div class="col-lg-12 text-center">
-					<div class="pagination-wrap">
-						<ul>
-							<li><a href="#">Prev</a></li>
-							<li><a href="#">1</a></li>
-							<li><a class="active" href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">Next</a></li>
-						</ul>
-					</div>
+			<div class="col-lg-8 offset-lg-2 text-center" th:if="${!hasItems}">
+				<div class="section-title">
+					<h4><span class="orange-text">Không có sản phẩm!!!</span> </h4>
 				</div>
 			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12 text-center">
+				<!-- Hiển thị phân trang -->
+				<div class="pagination-wrap" th:if="${totalPages > 1}">
+					<ul>
+						<!-- Liên kết đến trang trước (prev) -->
+						<li th:if="${currentPage > 1}">
+							<a th:href="@{/index(page=${currentPage - 1}, size=${size})}">Prev</a>
+						</li>
+						<li th:if="${currentPage == 1}">
+							<span>Prev</span>
+						</li>
+
+						<!-- Liên kết đến các trang -->
+						<li th:each="pageNumber : ${#numbers.sequence(1, totalPages)}">
+						<li th:if="${currentPage == pageNumber}">
+							<span th:text="${pageNumber}" class="active"></span>
+						</li>
+						<li th:unless="${currentPage == pageNumber}">
+							<a th:href="@{/index(page=${pageNumber}, size=${size})}" th:text="${pageNumber}"></a>
+						</li>
+						</li>
+
+						<!-- Liên kết đến trang tiếp theo (next) -->
+						<li th:if="${currentPage < totalPages}">
+							<a th:href="@{/index(page=${currentPage + 1}, size=${size})}">Next</a>
+						</li>
+						<li th:if="${currentPage == totalPages}">
+							<span>Next</span>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+		</div>
+		<!-- Menu -->
+
+
+
 	</div>
 	<!-- end product section -->
-	
+
 	<!-- product section -->
-	<div class="product-section mt-150 mb-150">
+	<!-- <div class="product-section mt-150 mb-150">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8 offset-lg-2 text-center">
-					<div class="section-title">	
+					<div class="section-title">
 						<h3><span class="orange-text">Our</span> Đồ uống</h3>
 					</div>
 				</div>
 			</div>
 
 			<div class="row">
-				<div class="col-lg-4 col-md-6 text-center">
+				<div class="col-lg-4 col-md-6 text-center" th:each="item : ${items}">
 					<div class="single-product-item">
 						<div class="product-image">
-							<a th:href="@{/single-product}"><img src="assets/img/products/item11.jpg" alt=""></a>
+							<a th:href="@{/single-product}">
+								<img th:src="@{'/uploads/' + ${item.image.substring(11)}}" alt="Product Image"></a>
 						</div>
-						<h3>Trà sửa</h3>
-						<p class="product-price"><span>Đồ uống</span> 85.000 </p>
-						<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
-					</div>
-				</div>
-					<div class="col-lg-4 col-md-6 text-center">
-					<div class="single-product-item">
-						<div class="product-image">
-							<a th:href="@{/single-product}"><img src="assets/img/products/item12.jpg" alt=""></a>
-						</div>
-						<h3>Trà sửa</h3>
-						<p class="product-price"><span>Đồ uống</span> 35.000 </p>
-						<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0 text-center">
-					<div class="single-product-item">
-						<div class="product-image">
-							<a th:href="@{/single-product}"><img src="assets/img/products/item15.jpg" alt=""></a>
-						</div>
-						<h3>Capuchino</h3>
-						<p class="product-price"><span>Đồ uống</span> 35.000 </p>
+						<h3 th:text="${item.name}"></h3>
+						<p class="product-price"><span>Đồ ăn</span> 70.000 </p>
 						<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="row">
-				<div class="col-lg-12 text-center">
-					<div class="pagination-wrap">
-						<ul>
-							<li><a href="#">Prev</a></li>
-							<li><a href="#">1</a></li>
-							<li><a class="active" href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">Next</a></li>
-						</ul>
-					</div>
+			<div class="col-lg-12 text-center">
+				<div class="pagination-wrap">
+					<ul>
+						<li><a href="#">Prev</a></li>
+						<li><a href="#">1</a></li>
+						<li><a class="active" href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li><a href="#">Next</a></li>
+					</ul>
 				</div>
 			</div>
-	</div>
+		</div>
+	</div> -->
 	<!-- end product section -->
 	<!-- cart banner section -->
 	<section class="cart-banner pt-100 pb-100">
-    	<div class="container">
-        	
-        </div>
-    </section>
-    <!-- end cart banner section -->
+		<div class="container">
 
-		<!-- features list section -->
+		</div>
+	</section>
+	<!-- end cart banner section -->
+
+	<!-- features list section -->
 	<div class="list-section pt-80 pb-80">
 		<div class="container">
 
@@ -288,8 +299,8 @@
 		</div>
 	</div>
 	<!-- end logo carousel -->
-     <div th:include="/layout/footer.html"></div>
-	
+	<div th:include="/layout/footer.html"></div>
+
 	<!-- jquery -->
 	<script src="assets/js/jquery-1.11.3.min.js"></script>
 	<!-- bootstrap -->
@@ -312,4 +323,5 @@
 	<script src="assets/js/main.js"></script>
 
 </body>
+
 </html>

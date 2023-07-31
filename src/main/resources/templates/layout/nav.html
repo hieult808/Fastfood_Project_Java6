@@ -22,7 +22,16 @@
 										<li><a th:href="@{/index_2}">Slider Home</a></li>
 									</ul>
 								</li>
-								<li><a th:href="@{/about}">About</a></li>
+								<li>
+									<a th:href="@{/index}">Menu</a>
+									<ul class="sub-menu">
+										<!-- Lặp qua danh sách các mục (cates) và tạo các phần tử <li> chứa tên của từng mục -->
+										<li th:each="cate : ${cates}">
+											<a th:href="@{/index(cateId=${cate.categoryId})}" th:text="${cate.name}"></a>
+										</li>
+									</ul>
+								</li>
+								
 								<li><a href="#">Pages</a>
 									<ul class="sub-menu">
 										<li><a th:href="@{/404}">404 page</a></li>
@@ -66,3 +75,4 @@
 		</div>
 	</div>
 	<!-- end header -->
+	
