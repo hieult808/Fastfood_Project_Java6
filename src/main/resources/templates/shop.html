@@ -33,7 +33,7 @@
 	<!-- responsive -->
 	<link rel="stylesheet" href="assets/css/responsive.css">
 
-   <!--  <style>
+	<!--  <style>
 
 	  .product-price::after {
 	    content: " ₫"; /* Đơn vị tiền tệ: đ (Đồng Việt Nam) */
@@ -96,52 +96,27 @@
 		<div class="container">
 
 			<div class="row">
-
-                <div class="col-md-12">
-                    <div class="product-filters">
-                        <ul>
-                            <li class="active" data-filter="*">All</li>
-                            <li data-filter=".strawberry">Đồ ăn</li>
-                            <li data-filter=".berry">Đồ uống</li>
-                            <li data-filter=".lemon">Đồ ngọt</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-
-				<div class="col-md-12">
-					<div class="product-filters">
-						<ul>
-							<li class="active" th:each="cate : ${cates}">
-								<a style="color: black;" th:href="@{/shop(cateId=${cate.categoryId})}"
-									th:text="${cate.name}"></a>
-							</li>
-						</ul>
-					</div>
+			
+			<div class="col-md-12">
+				<div class="product-filters">
+					<ul>
+						<li class="active" th:each="cate : ${cates}">
+							<a style="color: black;" th:href="@{/shop(cateId=${cate.categoryId})}"
+								th:text="${cate.name}"></a>
+						</li>
+					</ul>
 				</div>
 			</div>
-		
+		</div>
 
-			<div class="row product-lists">
+	
+		<div class="row product-lists">
+		
 				<div class="col-lg-4 col-md-6 text-center strawberry" th:each="item : ${items}">
 					<div class="single-product-item">
 						<div class="product-image">
 
-						<a th:href="@{/single-product}">     
-							<img th:src="@{'/uploads/' + ${item.image.substring(11)}}"
-									alt="Product Image"></a>
-
-							<a href="single-product.html"><img src="assets/img/products/product-img-1.jpg" alt=""></a>
-
-						</div>
-						<h3 th:text="${item.name}"></h3>
-						<p class="product-price" th:text="${@customNumberFormat.formatCurrency(item.price)}"><span>Per Kg</span> 85$ </p>
-						<a th:href="@{/cart}" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
-					</div>
-				</div>
-
-							<a th:href="@{/shop/{itemId}(itemId=${item.itemId})}">
+							<a th:href="@{/single-product}">
 								<img th:src="@{'/uploads/' + ${item.image.substring(11)}}" alt="Product Image"></a>
 						</div>
 						<h3 th:text="${item.name}"></h3>
@@ -150,9 +125,10 @@
 						<a th:href="@{/cart}" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
 					</div>
 				</div>
-			</div>
+			
+		</div>
 
-			<!-- Hiển thị thông báo nếu không có sản phẩm -->
+		<!-- Hiển thị thông báo nếu không có sản phẩm -->
 		<div class="row">
 			<div class="col-lg-8 offset-lg-2 text-center" th:if="${!hasItems}">
 				<div class="section-title">
@@ -160,39 +136,40 @@
 				</div>
 			</div>
 		</div>
-			<div class="row">
-				<div class="col-lg-12 text-center">
-					<div class="pagination-wrap">
-						<ul>
-							<li th:if="${currentPage > 1}">
-								<a th:href="@{/shop(page=${currentPage - 1}, size=${size})}">Prev</a>
-							</li>
-							<li th:if="${currentPage == 1}">
-								<span>Prev</span>
-							</li>
+		
+		<div class="row">
+			<div class="col-lg-12 text-center">
+				<div class="pagination-wrap">
+					<ul>
+						<li th:if="${currentPage > 1}">
+							<a th:href="@{/shop(page=${currentPage - 1}, size=${size})}">Prev</a>
+						</li>
+						<li th:if="${currentPage == 1}">
+							<span>Prev</span>
+						</li>
 
-							<!-- Liên kết đến các trang -->
-							<li th:each="pageNumber : ${#numbers.sequence(1, totalPages)}">
-							<li th:if="${currentPage == pageNumber}">
-								<span th:text="${pageNumber}" class="active"></span>
-							</li>
-							<li th:unless="${currentPage == pageNumber}">
-								<a th:href="@{/shop(page=${pageNumber}, size=${size})}" th:text="${pageNumber}"></a>
-							</li>
-							</li>
+						<!-- Liên kết đến các trang -->
+						<li th:each="pageNumber : ${#numbers.sequence(1, totalPages)}">
+						<li th:if="${currentPage == pageNumber}">
+							<span th:text="${pageNumber}" class="active"></span>
+						</li>
+						<li th:unless="${currentPage == pageNumber}">
+							<a th:href="@{/shop(page=${pageNumber}, size=${size})}" th:text="${pageNumber}"></a>
+						</li>
+						</li>
 
-							<!-- Liên kết đến trang tiếp theo (next) -->
-							<li th:if="${currentPage < totalPages}">
-								<a th:href="@{/shop(page=${currentPage + 1}, size=${size})}">Next</a>
-							</li>
-							<li th:if="${currentPage == totalPages}">
-								<span>Next</span>
-							</li>
-						</ul>
-					</div>
+						<!-- Liên kết đến trang tiếp theo (next) -->
+						<li th:if="${currentPage < totalPages}">
+							<a th:href="@{/shop(page=${currentPage + 1}, size=${size})}">Next</a>
+						</li>
+						<li th:if="${currentPage == totalPages}">
+							<span>Next</span>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</div>
+	</div>
 	</div>
 	<!-- end products -->
 
@@ -246,13 +223,13 @@
 	<script src="assets/js/sticker.js"></script>
 	<!-- main js -->
 	<script src="assets/js/main.js"></script>
-<script>
+	<script>
 	// var app = angular.module('myApp', []);
 	// 	app.controller('myCtrl', function($scope) {
 	// 	  $scope.message = 'Hello, AngularJS!';
     //       alert("Đây là thông báo đơn giản!");
 	// 	});
-</script>
+	</script>
 </body>
 
 </html>
