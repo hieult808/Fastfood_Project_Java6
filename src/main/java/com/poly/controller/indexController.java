@@ -1,17 +1,24 @@
 package com.poly.controller;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import com.poly.dao.ItemsDao;
+import com.poly.entity.Item;
 
 
 
 @Controller
 public class indexController {
-
+	@Autowired
+	ItemsDao itemDao;
+	
 	@GetMapping("/index")
 	public String index(Model model) {
+		model.addAttribute("listItems", itemDao.findAll());
 		return "index";
 	}
 	@GetMapping("/index_2")
