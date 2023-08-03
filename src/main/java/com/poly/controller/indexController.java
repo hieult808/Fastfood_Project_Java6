@@ -12,12 +12,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.poly.dao.CategoryDao;
 import com.poly.dao.ItemDao;
 import com.poly.entity.Category;
 import com.poly.entity.Item;
 import com.poly.service.CategoryService;
+import com.poly.service.CategoryServiceImpl;
 import com.poly.service.ItemService;
+
+
+
 
 @Controller
 public class indexController {
@@ -26,7 +31,8 @@ public class indexController {
 	@Autowired
 	private CategoryService categoryService;
 	@Autowired
-	CategoryDao cateDao;
+	private CategoryServiceImpl categoryServiceImpl;
+
 
 	@GetMapping({ "/index", "/" })
     public String index(Model model, @RequestParam(defaultValue = "1") int page,
@@ -37,7 +43,8 @@ public class indexController {
                         @RequestParam(name = "maxPrice", required = false) BigDecimal maxPrice) {
 
         // Lấy danh sách các loại sản phẩm và đưa vào model
-        List<Category> cates = cateDao.findAll();
+        List<Category> cates = categoryServiceImpl.findAll();
+
         model.addAttribute("cates", cates);
 
         // Biến để kiểm tra có sản phẩm hay không
@@ -76,6 +83,7 @@ public class indexController {
 	@GetMapping("/index_2")
 	public String index2(Model model) {
 		return "index_2";
+
 	}
 
 	@GetMapping("/cart")

@@ -7,11 +7,15 @@ import org.springframework.stereotype.Service;
 
 import com.poly.dao.CategoryDao;
 import com.poly.entity.Category;
-
 @Service
+public class CategoryServiceImpl implements CategoryService {
+	@Autowired
+	CategoryDao dao;
 
-public interface CategoryService {
-	
-	List<Category> findAll();
+	@Override
+	public List<Category> findAll() {
+		return dao.findAll();
+	}
+
 
 }

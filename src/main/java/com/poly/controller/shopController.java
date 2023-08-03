@@ -1,16 +1,17 @@
 package com.poly.controller;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.poly.dao.ItemDao;
 import com.poly.entity.Item;
+import org.springframework.web.bind.annotation.RequestParam;
+import com.poly.entity.Category;
+import com.poly.service.CategoryServiceImpl;
 import com.poly.service.ItemService;
 
 @Controller
@@ -20,10 +21,44 @@ public class shopController {
 	@Autowired
 	private ItemService itemService;
 
+	@Autowired
+	private CategoryServiceImpl categoryServiceImpl;
+
 	@GetMapping("/shop")
-	public String shop(Model model) {
-		List<Item> item = dao.findAll();
+	public String shop(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "3") int size,
+			@RequestParam(name = "cateId", required = false) Integer cateId, Model model) {
+		// Lấy danh sách các loại sản phẩm và đưa vào model
+		List<Category> cates = categoryServiceImpl.findAll();
+		model.addAttribute("cates", cates);
+
+		// Biến để kiểm tra có sản phẩm hay không
+		boolean hasItems = true;
+		List<Item> item;
+
+		if (cateId != null) {
+			item = itemService.getItemsByCategory(cateId);
+			Page<Item> itemsPage = itemService.getItemsByPage(page, size);
+			int totalPages = (int) Math.ceil((double) itemsPage.getTotalElements() / size);
+			model.addAttribute("currentPage", page);
+			if (totalPages < 1) {
+				totalPages = 1;
+			}
+			model.addAttribute("totalPages", totalPages);
+		} else {
+			Page<Item> itemsPage = itemService.getItemsByPage(page, size);
+			item = itemsPage.getContent();
+			model.addAttribute("currentPage", page);
+			int totalPages = (int) Math.ceil((double) itemsPage.getTotalElements() / size);
+			if (totalPages < 1) {
+				totalPages = 1;
+			}
+			model.addAttribute("totalPages", totalPages);
+		}
+		// Kiểm tra có sản phẩm hay không
+		hasItems = !item.isEmpty();
 		model.addAttribute("items", item);
+		model.addAttribute("hasItems", hasItems);
+
 		return "shop";
 	}
 
@@ -32,7 +67,9 @@ public class shopController {
 		Item item = dao.findById(itemId).orElse(null);
 		model.addAttribute("items", item);
 		// Lấy danh sách sản phẩm cùng loại trừ sản phẩm đang hiển thị
-		List<Item> relatedProducts = itemService.getRelateditemsExcludingCurrent(item.getCategory().getCategoryId(),itemId);
+
+		List<Item> relatedProducts = itemService.getRelateditemsExcludingCurrent(item.getCategory().getCategoryId(),
+				itemId);
 		model.addAttribute("itemss", relatedProducts);
 		return "single-product";
 	}
