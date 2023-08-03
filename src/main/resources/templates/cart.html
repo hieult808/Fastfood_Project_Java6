@@ -89,7 +89,7 @@
 						<table class="cart-table">
 							<thead class="cart-table-head">
 								<tr class="table-head-row">
-									<th><input type="checkbox" id="checkAll"></th>
+									<th><input type="checkbox" id="toggle-all" onclick="toggleAll(this)"></th>
 									<th class="product-image">Product Image</th>
 									<th class="product-name">Name</th>
 									<th class="product-price">Price</th>
@@ -100,7 +100,7 @@
 							</thead>
 							<tbody>
 								<tr class="table-body-row">
-									<td class="product-total"><input type="checkbox" class="checkbox"></td>
+									<td class="product-total"><input type="checkbox" name="product" onchange="updateToggleAll()"></td>
 									<td class="product-image"><img src="assets/img/products/product-img-1.jpg" alt=""></td>
 									<td class="product-name">Strawberry</td>
 									<td class="product-price">$85</td>
@@ -109,7 +109,7 @@
 									<td class="product-remove"><a href="#"><i class="far fa-window-close"></i></a></td>
 								</tr>
 								<tr class="table-body-row">
-									<td class="product-total"><input type="checkbox" class="checkbox"></td>
+									<td class="product-total"><input type="checkbox" name="product" onchange="updateToggleAll()"></td>
 									<td class="product-image"><img src="assets/img/products/product-img-1.jpg" alt=""></td>
 									<td class="product-name">Strawberry</td>
 									<td class="product-price">$85</td>
@@ -195,21 +195,27 @@
 	<!-- end logo carousel -->
 
 	  <div th:include="/layout/footer.html"></div>
+	<!-- CheckAll -->
 	<script>
-    // Lấy ra checkbox chứa ID "checkAll"
-    var checkAll = document.getElementById('checkAll');
-
-    // Lấy ra tất cả các checkbox có class là "checkbox"
-    var checkboxes = document.getElementsByClassName('checkbox');
-
-    // Gán sự kiện onclick cho checkbox "checkAll"
-    checkAll.onclick = function() {
-        // Duyệt qua tất cả các checkbox và thay đổi trạng thái checked của chúng
-        for (var i = 0; i < checkboxes.length; i++) {
-            checkboxes[i].checked = checkAll.checked;
-        }
-    };
-</script>
+		function toggleAll(checkbox) {
+		  var checkboxes = document.getElementsByName("product");
+		  for (var i = 0; i < checkboxes.length; i++) {
+			checkboxes[i].checked = checkbox.checked;
+		  }
+		}
+	
+		function updateToggleAll() {
+		  var checkboxes = document.getElementsByName("product");
+		  var toggleAllCheckbox = document.getElementById("toggle-all");
+		  for (var i = 0; i < checkboxes.length; i++) {
+			if (!checkboxes[i].checked) {
+			  toggleAllCheckbox.checked = false;
+			  return;
+			}
+		  }
+		  toggleAllCheckbox.checked = true;
+		}
+	  </script>
 	<!-- jquery -->
 	<script src="assets/js/jquery-1.11.3.min.js"></script>
 	<!-- bootstrap -->
