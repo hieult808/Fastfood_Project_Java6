@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Responsive Bootstrap4 Shop Template, Created by Imran Hossain from https://imransdesign.com/">
+	<meta name="description"
+		content="Responsive Bootstrap4 Shop Template, Created by Imran Hossain from https://imransdesign.com/">
 
 	<!-- title -->
 	<title>Shop</title>
@@ -30,18 +32,27 @@
 	<link rel="stylesheet" href="assets/css/main.css">
 	<!-- responsive -->
 	<link rel="stylesheet" href="assets/css/responsive.css">
+<<<<<<< Updated upstream
 
+=======
+	<!--  <style>
+	  .product-price::after {
+	    content: " ₫"; /* Đơn vị tiền tệ: đ (Đồng Việt Nam) */
+	  }
+	</style> -->
+	<script th:src="@{https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js}"></script>
+>>>>>>> Stashed changes
 </head>
-<body>
-	
+
+<body ng-app="myApp" ng-controller="myCtrl">
 	<!--PreLoader-->
-    <div class="loader">
-        <div class="loader-inner">
-            <div class="circle"></div>
-        </div>
-    </div>
-    <!--PreLoader Ends-->
-	
+	<div class="loader">
+		<div class="loader-inner">
+			<div class="circle"></div>
+		</div>
+	</div>
+	<!--PreLoader Ends-->
+
 	<!-- header -->
 	<div th:include="/layout/nav.html"></div>
 	<!-- end header -->
@@ -64,7 +75,7 @@
 		</div>
 	</div>
 	<!-- end search arewa -->
-	
+
 	<!-- breadcrumb-section -->
 	<div class="breadcrumb-section breadcrumb-bg">
 		<div class="container">
@@ -85,6 +96,7 @@
 		<div class="container">
 
 			<div class="row">
+<<<<<<< Updated upstream
                 <div class="col-md-12">
                     <div class="product-filters">
                         <ul>
@@ -97,10 +109,25 @@
                 </div>
             </div>
 
+=======
+				<div class="col-md-12">
+					<div class="product-filters">
+						<ul>
+							<li class="active" th:each="cate : ${cates}">
+								<a style="color: black;" th:href="@{/shop(cateId=${cate.categoryId})}"
+									th:text="${cate.name}"></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		
+>>>>>>> Stashed changes
 			<div class="row product-lists">
 				<div class="col-lg-4 col-md-6 text-center strawberry">
 					<div class="single-product-item">
 						<div class="product-image">
+<<<<<<< Updated upstream
 							<a href="single-product.html"><img src="assets/img/products/product-img-1.jpg" alt=""></a>
 						</div>
 						<h3>Strawberry</h3>
@@ -158,17 +185,56 @@
 						<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
 					</div>
 				</div>
+=======
+							<a th:href="@{/shop/{itemId}(itemId=${item.itemId})}">
+								<img th:src="@{'/uploads/' + ${item.image.substring(11)}}" alt="Product Image"></a>
+						</div>
+						<h3 th:text="${item.name}"></h3>
+						<p class="product-price" th:text="${@customNumberFormat.formatCurrency(item.price)}"><span>Per
+								Kg</span> 85$ </p>
+						<a th:href="@{/cart}" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+					</div>
+				</div>
+
+>>>>>>> Stashed changes
 			</div>
 
+			<!-- Hiển thị thông báo nếu không có sản phẩm -->
+		<div class="row">
+			<div class="col-lg-8 offset-lg-2 text-center" th:if="${!hasItems}">
+				<div class="section-title">
+					<h4><span class="orange-text">Không có sản phẩm!!!</span> </h4>
+				</div>
+			</div>
+		</div>
 			<div class="row">
 				<div class="col-lg-12 text-center">
 					<div class="pagination-wrap">
 						<ul>
-							<li><a href="#">Prev</a></li>
-							<li><a href="#">1</a></li>
-							<li><a class="active" href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">Next</a></li>
+							<li th:if="${currentPage > 1}">
+								<a th:href="@{/shop(page=${currentPage - 1}, size=${size})}">Prev</a>
+							</li>
+							<li th:if="${currentPage == 1}">
+								<span>Prev</span>
+							</li>
+
+							<!-- Liên kết đến các trang -->
+							<li th:each="pageNumber : ${#numbers.sequence(1, totalPages)}">
+							<li th:if="${currentPage == pageNumber}">
+								<span th:text="${pageNumber}" class="active"></span>
+							</li>
+							<li th:unless="${currentPage == pageNumber}">
+								<a th:href="@{/shop(page=${pageNumber}, size=${size})}" th:text="${pageNumber}"></a>
+							</li>
+							</li>
+
+							<!-- Liên kết đến trang tiếp theo (next) -->
+							<li th:if="${currentPage < totalPages}">
+								<a th:href="@{/shop(page=${currentPage + 1}, size=${size})}">Next</a>
+							</li>
+							<li th:if="${currentPage == totalPages}">
+								<span>Next</span>
+							</li>
 						</ul>
 					</div>
 				</div>
@@ -205,8 +271,8 @@
 	</div>
 	<!-- end logo carousel -->
 
-	  <div th:include="/layout/footer.html"></div>
-	
+	<div th:include="/layout/footer.html"></div>
+
 	<!-- jquery -->
 	<script src="assets/js/jquery-1.11.3.min.js"></script>
 	<!-- bootstrap -->
@@ -227,6 +293,13 @@
 	<script src="assets/js/sticker.js"></script>
 	<!-- main js -->
 	<script src="assets/js/main.js"></script>
-
+<script>
+	// var app = angular.module('myApp', []);
+	// 	app.controller('myCtrl', function($scope) {
+	// 	  $scope.message = 'Hello, AngularJS!';
+    //       alert("Đây là thông báo đơn giản!");
+	// 	});
+</script>
 </body>
+
 </html>
