@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.poly.entity.Item;
 
-public interface ItemDao extends JpaRepository<Item, Integer> {
+public interface ItemsDao extends JpaRepository<Item, Integer> {
 
 }
