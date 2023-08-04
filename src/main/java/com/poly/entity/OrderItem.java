@@ -12,6 +12,7 @@ import lombok.Data;
 
 @Data
 @Entity
+@IdClass(OrderItemId.class)
 @Table(name = "OrderItems")
 public class OrderItem implements Serializable {
 	@Id
