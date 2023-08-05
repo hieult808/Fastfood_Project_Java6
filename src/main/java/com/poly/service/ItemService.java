@@ -23,10 +23,10 @@ public class ItemService {
 		return itemDao.findAll(pageable);
 	}
 
-	public Item getProductById(Integer productId) {
+	public Item findById(Integer itemId) {
 		// Implement code để lấy thông tin sản phẩm dựa trên productId từ cơ sở dữ liệu
 		// Ví dụ:
-		return itemDao.findById(productId).orElse(null);
+		return itemDao.findById(itemId).orElse(null);
 	}
 
 	public List<Item> getRelateditemsExcludingCurrent(Integer categoryId, Integer currentItemId) {

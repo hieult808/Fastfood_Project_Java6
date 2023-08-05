@@ -36,11 +36,6 @@ public class CartController {
 
 	@GetMapping("/cart/{itemId}")
 	public String addToCart(@PathVariable int itemId, Model model) {
-		Item item = dao.findById(itemId).orElse(null);
-		if (item != null) {
-			cartService.addToCart(item);
-			model.addAttribute("items", item);
-		}
 		return "cart";
 	}
 }

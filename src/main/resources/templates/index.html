@@ -32,15 +32,10 @@
 	<link rel="stylesheet" href="assets/css/main.css">
 	<!-- responsive -->
 	<link rel="stylesheet" href="assets/css/responsive.css">
-	<!-- <style>
-		.product-price::after {
-			content: " ₫";
-			/* Đơn vị tiền tệ: đ (Đồng Việt Nam) */
-		}
-	</style> -->
+	<script th:src="@{https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js}"></script>
 </head>
 
-<body>
+<body ng-app="shopping-cart-app" ng-controller="shopping-cart-ctrl">
 
 	<!--PreLoader-->
 	<div class="loader">
@@ -124,7 +119,7 @@
 						<h3 th:text="${item.name}"></h3>
 						<span>Đồ ăn</span>
 						<p class="product-price" th:text="${@customNumberFormat.formatCurrency(item.price)}"></p>
-						<a th:href="@{/cart/{itemId}(itemId=${item.itemId})}" class="cart-btn">
+						<a th:attr="ng-click=@{|cart.add(${item.itemId})|}" class="cart-btn">
 							<i class="fas fa-shopping-cart"></i> Add to Cart</a>
 					</div>
 				</div>
@@ -178,48 +173,7 @@
 
 
 	</div>
-	<!-- end product section -->
-
-	<!-- product section -->
-	<!-- <div class="product-section mt-150 mb-150">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-8 offset-lg-2 text-center">
-					<div class="section-title">
-						<h3><span class="orange-text">Our</span> Đồ uống</h3>
-					</div>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-lg-4 col-md-6 text-center" th:each="item : ${items}">
-					<div class="single-product-item">
-						<div class="product-image">
-							<a th:href="@{/single-product}">
-								<img th:src="@{'/uploads/' + ${item.image.substring(11)}}" alt="Product Image"></a>
-						</div>
-						<h3 th:text="${item.name}"></h3>
-						<p class="product-price"><span>Đồ ăn</span> 70.000 </p>
-						<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-lg-12 text-center">
-				<div class="pagination-wrap">
-					<ul>
-						<li><a href="#">Prev</a></li>
-						<li><a href="#">1</a></li>
-						<li><a class="active" href="#">2</a></li>
-						<li><a href="#">3</a></li>
-						<li><a href="#">Next</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div> -->
-	<!-- end product section -->
+	
 	<!-- cart banner section -->
 	<section class="cart-banner pt-100 pb-100">
 		<div class="container">
@@ -321,6 +275,7 @@
 	<script src="assets/js/sticker.js"></script>
 	<!-- main js -->
 	<script src="assets/js/main.js"></script>
+	<script src="assets/js/shopping-cart-app.js"></script>
 
 </body>
 
