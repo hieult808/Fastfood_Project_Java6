@@ -103,11 +103,11 @@
 								<tr class="table-body-row" ng-repeat="item in cart.items">
 									<td class="product-total"><input type="checkbox" ng-model="item.selected" class="checkbox"></td>
 									<td class="product-image"><img alt="Product Image"></td>
-									<td class="product-name">{{item.name}}</td>
-									<td class="product-price">{{item.price| number: 0}}</td>
-									<td class="product-quantity"><input ng-change="cart.saveToLocalStorage()"  ng-model="item.qty" type="number" min="1" value="1"></td>
-									<td class="product-total">{{item.qty*item.price | number: 0}}</td>
-									<td class="product-remove"><button  ng-click="cart.remote(item.itemId)"><i class="far fa-window-close"></i></button></td>
+									<td class="product-name">{{item.item.name}}</td>
+									<td class="product-price">{{item.item.price| number: 0}}</td>
+									<td class="product-quantity"><input ng-change=""  ng-model="item.quantity" type="number" min="1"></td>
+									<td class="product-total">{{item.quantity*item.item.price | number: 0}}</td>
+									<td class="product-remove"><button ng-click="cart.remove(item.itemId)"><i class="far fa-window-close"></i></button></td>
 								</tr>
 							</tbody>
 						</table>

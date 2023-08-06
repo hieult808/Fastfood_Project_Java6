@@ -9,7 +9,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.poly.dao.AccountDao;
 import com.poly.dao.ItemDao;
+import com.poly.entity.Account;
 import com.poly.entity.Item;
 
 @Service
@@ -17,6 +19,8 @@ public class ItemService {
 
 	@Autowired
 	private ItemDao itemDao;
+	@Autowired
+	AccountDao dao;
 
 	public Page<Item> getItemsByPage(int pageNumber, int pageSize) {
 		Pageable pageable = PageRequest.of(pageNumber - 1, pageSize);
@@ -61,4 +65,5 @@ public class ItemService {
 		// Nếu cả từ khóa và giá cả đều có, tìm kiếm theo cả hai tiêu chí
 		return itemDao.findByNameContainingIgnoreCaseAndPriceBetween(keyword, minPrice, maxPrice);
 	}
+
 }
